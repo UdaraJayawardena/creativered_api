@@ -1,0 +1,44 @@
+{
+  "name": "Item_View",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "foreignKeys": {
+    "customerViewId": {
+      "name": "customerViewId",
+      "foreignKey": "customerViewId",
+      "entityKey": "id",
+      "entity": "Customer"
+    },
+    "itmid": {
+      "name": "itmid",
+      "foreignKey": "itmid",
+      "entityKey": "id",
+      "entity": "Item"
+    }
+  },
+  "properties": {
+    "visitTime": {
+      "type": "string",
+      "required": true,
+      "length": null,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "visitTime",
+        "dataType": "time",
+        "dataLength": null,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "Y"
+      },
+      "_selectable": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

@@ -1,0 +1,125 @@
+{
+  "name": "Orders",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "foreignKeys": {
+    "customerOrderId": {
+      "name": "customerOrderId",
+      "foreignKey": "customerOrderId",
+      "entityKey": "id",
+      "entity": "Customer"
+    },
+    "billingid": {
+      "name": "billingid",
+      "foreignKey": "billingid",
+      "entityKey": "id",
+      "entity": "BillingAddress"
+    },
+    "shippingid": {
+      "name": "shippingid",
+      "foreignKey": "shippingid",
+      "entityKey": "id",
+      "entity": "ShippingAddress"
+    }
+  },
+  "properties": {
+    "orderDate": {
+      "type": "string",
+      "required": true,
+      "length": null,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "orderDate",
+        "dataType": "date",
+        "dataLength": null,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "Y"
+      },
+      "_selectable": true
+    },
+    "orderTime": {
+      "type": "string",
+      "required": true,
+      "length": null,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "orderTime",
+        "dataType": "time",
+        "dataLength": null,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "Y"
+      },
+      "_selectable": true
+    },
+    "status": {
+      "type": "string"
+    },
+    "paymentMethod": {
+      "type": "string"
+    },
+    "paymentId": {
+      "type": "string"
+    },
+    "trackingId": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "customer": {
+      "type": "belongsTo",
+      "model": "Customer",
+      "foreignKey": "customerOrderId",
+      "primaryKey": "id"
+    },
+    "billing-address": {
+      "type": "belongsTo",
+      "model": "BillingAddress",
+      "foreignKey": "billingid",
+      "primaryKey": "id"
+    },
+    "shipping-address": {
+      "type": "belongsTo",
+      "model": "ShippingAddress",
+      "foreignKey": "shippingid",
+      "primaryKey": "id"
+    },
+    "refund-request": {
+      "type": "hasMany",
+      "model": "RefundRequest",
+      "foreignKey": "refundOrderId"
+    },
+    "feedback": {
+      "type": "hasMany",
+      "model": "Feedback",
+      "foreignKey": "feedbackOrderId"
+    },
+    "complain": {
+      "type": "hasMany",
+      "model": "Complain",
+      "foreignKey": "complainOrderId"
+    },
+    "order-detail": {
+      "type": "hasMany",
+      "model": "OrderDetail",
+      "foreignKey": "orderid",
+      "through": "OrderDetail"
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "DENY"
+    }
+  ],
+  "methods": {}
+}

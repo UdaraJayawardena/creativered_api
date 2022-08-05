@@ -1,0 +1,158 @@
+<!--<!doctype html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--<meta charset="UTF-8">-->
+<!--<meta name="viewport"-->
+<!--content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">-->
+<!--<meta http-equiv="X-UA-Compatible" content="ie=edge">-->
+<!--<title>Creative Red</title>-->
+<!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"-->
+<!--integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">-->
+
+
+<!--</head>-->
+<!--<body>-->
+
+<!--<nav class="navbar navbar-expand-md navbar-dark bg-dark py-3">-->
+<!--<div class="container">-->
+<!--<a href="index.html" class="navbar-brand"></a>-->
+<!--<h3 class="d-inline align-middle" style="color: white;">Creative Red</h3>-->
+<!--</div>-->
+<!--</nav>-->
+<!--<div class="container">-->
+
+<!--<section class="py-2">-->
+<!--<div class="row">-->
+<!--<div class="col-md-6 mt-3 pt-5">-->
+<!--<h1 class="display-3 mt-3 pt-5">-->
+<!--Camera Set-->
+<!--</h1>-->
+<!--<p>-->
+<!--Lorem Ipsum is simply dummy text of the printing-->
+<!--and typesetting industry.-->
+<!--Lorem Ipsum has been the industry's standard dummy-->
+<!--text ever since the 1500s, when an unknown printer-->
+<!--took a galley of type and scrambled it to make a-->
+<!--type specimen book. It ha-->
+<!--</p>-->
+
+<!--<form action="/charge" method="POST">-->
+<!--<script-->
+<!--src="https://checkout.stripe.com/checkout.js" class="stripe-button"-->
+<!--data-key="pk_test_rajcexCCgLg5Zg6JlC6bYo9t"-->
+<!--data-amount="5"-->
+<!--data-name="sample camera"-->
+<!--data-description="camera"-->
+<!--data-image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSda09kqBOj_7HrNb_RZCpZMcGItCn0s-ArINyTez77b1wCCZPg"-->
+<!--data-locale="auto">-->
+<!--</script>-->
+
+<!--<script>-->
+<!--document.getElementsByClassName('stripe-button-el')[0]-->
+<!--.style.display = 'none';-->
+<!--</script>-->
+
+<!--<button type="submit" class="btn btn-outline-dark text-white btn-lg"-->
+<!--style="background-color: #0004ff;  width: 300px; margin-bottom: 10px;">-->
+<!--Purchase for $25 using stripe-->
+<!--</button>-->
+
+
+<!--</form>-->
+
+<!--<form action="/pay" method="post">-->
+<!--<input type="submit" value="Purchase for $25 using paypal" class="btn btn-outline-dark text-white btn-lg"-->
+<!--style="background-color: #333333; width: 300px;">-->
+<!--</form>-->
+
+<!--</div>-->
+<!--<div class="col-md-6">-->
+<!--<img-->
+<!--src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSK-I5r5usyjt6xUIsZc9UHktT01-TgKkANBlJPSsp3tYcT99eC2g"-->
+<!--alt="" class="img-fluid">-->
+<!--</div>-->
+<!--</div>-->
+<!--</section>-->
+
+
+<!--</div>-->
+
+<!--</body>-->
+<!--</html>-->
+
+
+<!--////////////////////////////////////////////////////////-->
+
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+
+  <style>
+    .fontOfPayment {
+      font-family: Poppins, serif;
+      margin-bottom: 30px;
+    }
+
+    .paymentType {
+      width: 75%;
+      margin-top: 20px;
+      font-size: 30px;
+      margin-left: 15%;
+      text-align: center;
+    }
+
+    .btn-group-llg {
+      background-color: #d60d39;
+      border: none;
+      border-radius: 20px;
+      color: white;
+      text-align: center;
+      width: 70%;
+      margin-left: 15%;
+      height: 50px;
+      margin-top: 20px;
+      font-size: 20px;
+      outline: transparent;
+    }
+
+
+  </style>
+</head>
+<body>
+
+<div class="fontOfPayment">
+  <div class="paymentType">
+    Payment Type
+  </div>
+  <form action="/Success" method="get">
+    <script
+      src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+      data-key="pk_test_rajcexCCgLg5Zg6JlC6bYo9t"
+      data-amount="5"
+      data-name="creativered"
+      data-description="stripe payment"
+      data-image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSda09kqBOj_7HrNb_RZCpZMcGItCn0s-ArINyTez77b1wCCZPg"
+      data-locale="auto">
+    </script>
+    <script>
+      document.getElementsByClassName('stripe-button-el')[0]
+        .style.display = 'none';
+    </script>
+    <div>
+      <button type="submit" class="btn-group-llg">credit or debit card</button>
+    </div>
+  </form>
+  <form action="/pay" method="post">
+    <button type="submit" class="btn-group-llg">paypal</button>
+  </form>
+</div>
+
+</body>
+</html>

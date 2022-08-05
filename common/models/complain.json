@@ -1,0 +1,96 @@
+{
+  "name": "Complain",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "foreignKeys": {
+    "complainOrderId": {
+      "name": "complainOrderId",
+      "foreignKey": "complainOrderId",
+      "entityKey": "id",
+      "entity": "Orders"
+    },
+    "complainTypeID": {
+      "name": "complainTypeID",
+      "foreignKey": "complainTypeID",
+      "entityKey": "id",
+      "entity": "ComplainType"
+    }
+  },
+  "properties": {
+    "comDate": {
+      "type": "string",
+      "required": true,
+      "length": null,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "comDate",
+        "dataType": "date",
+        "dataLength": null,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "Y"
+      },
+      "_selectable": true
+    },
+    "comTime": {
+      "type": "string",
+      "required": true,
+      "length": null,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "comTime",
+        "dataType": "time",
+        "dataLength": null,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "Y"
+      },
+      "_selectable": true
+    },
+    "message": {
+      "type": "string",
+      "required": true
+    },
+    "status": {
+      "type": "string"
+    },
+    "complainTypeID": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "orders": {
+      "type": "belongsTo",
+      "model": "Orders",
+      "foreignKey": "complainOrderId",
+      "primaryKey": "id"
+    },
+    "complain-type": {
+      "type": "belongsTo",
+      "model": "Complain_Type",
+      "foreignKey": "complainTypeID",
+      "primaryKey": "id"
+    },
+    "complain-reply": {
+      "type": "hasMany",
+      "model": "Complain_reply",
+      "foreignKey": "complainID"
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "DENY"
+    }
+  ],
+  "methods": {}
+}

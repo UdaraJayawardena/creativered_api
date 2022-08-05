@@ -1,0 +1,69 @@
+{
+  "name": "ShippingAddress",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "foreignKeys": {
+    "customerShippingId": {
+      "name": "customerShippingId",
+      "foreignKey": "customerShippingId",
+      "entityKey": "id",
+      "entity": "Customer"
+    }
+  },
+  "properties": {
+    "firstName": {
+      "type": "string",
+      "required": true
+    },
+    "lastName": {
+      "type": "string",
+      "required": true
+    },
+    "addressOne": {
+      "type": "string",
+      "required": true
+    },
+    "addressTwo": {
+      "type": "string",
+      "required": true
+    },
+    "city": {
+      "type": "string",
+      "required": true
+    },
+    "country": {
+      "type": "string"
+    },
+    "postalCode": {
+      "type": "string",
+      "required": true
+    },
+    "status": "boolean"
+  },
+  "validations": [],
+  "relations": {
+    "customer": {
+      "type": "belongsTo",
+      "model": "Customer",
+      "foreignKey": "customerShippingId",
+      "primaryKey": "id"
+    },
+    "orders": {
+      "type": "hasMany",
+      "model": "Orders",
+      "foreignKey": "shippingid"
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "DENY"
+    }
+  ],
+  "methods": {}
+}

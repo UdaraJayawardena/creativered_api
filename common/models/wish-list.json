@@ -1,0 +1,32 @@
+{
+  "name": "WishList",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "foreignKeys": {
+    "customerWishlistId": {
+      "name": "customerWishlistId",
+      "foreignKey": "customerWishlistId",
+      "entityKey": "id",
+      "entity": "Customer"
+    }
+  },
+  "properties": {
+    "itemId": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "customer": {
+      "type": "belongsTo",
+      "model": "Customer",
+      "foreignKey": "customerWishlistId",
+      "primaryKey": "id"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

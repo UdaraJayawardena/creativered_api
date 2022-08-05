@@ -1,0 +1,133 @@
+{
+  "name": "Item",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "foreignKeys": {
+    "productid": {
+      "name": "productid",
+      "foreignKey": "productid",
+      "entityKey": "id",
+      "entity": "Product"
+    }
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "brand": {
+      "type": "string",
+      "required": true
+    },
+    "qtyOnHand": {
+      "type": "number",
+      "required": true
+    },
+    "price": {
+      "type": "Number",
+      "required": true,
+      "dataPrecision": 8,
+      "dataScale": 2,
+      "mysql": {
+        "columnName": "price",
+        "dataType": "DECIMAL",
+        "dataPrecision": 8,
+        "dataScale": 2
+      }
+    },
+    "image": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "highlights": {
+      "type": "text",
+      "required": true,
+      "dataType": "mediumtext"
+    },
+    "specification": {
+      "type": "text",
+      "required": true,
+      "dataType": "mediumtext"
+    },
+    "overview": {
+      "type": "text",
+      "required": true,
+      "dataType": "mediumtext"
+    },
+    "hits": {
+      "type": "number",
+      "required": true
+    },
+    "color": {
+      "type": "string",
+      "required": true
+    },
+    "rate": {
+      "type": "number",
+      "required": true
+    },
+    "discount": {
+      "type": "number",
+      "required": true,
+      "Mysql": {
+        "columnName": "discount",
+        "dataType": "DECIMAL",
+        "precision": 10,
+        "scale": 2
+      }
+    },
+    "productid": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "order-detail": {
+      "type": "hasMany",
+      "model": "OrderDetail",
+      "through": "OrderDetail"
+    },
+    "item-rate": {
+      "type": "hasMany",
+      "model": "Item_rate",
+      "foreignKey": "itm_id"
+    },
+    "item-view": {
+      "type": "hasMany",
+      "model": "Item_View",
+      "foreignKey": "itmid"
+    },
+    "product": {
+      "type": "belongsTo",
+      "model": "Product",
+      "foreignKey": "productid",
+      "primaryKey": "id"
+    },
+    "news": {
+      "type": "hasMany",
+      "model": "News",
+      "foreignKey": "item_id"
+    }
+  },
+  "acls": [
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "WRITE",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "DENY"
+    }
+  ],
+  "methods": {}
+}

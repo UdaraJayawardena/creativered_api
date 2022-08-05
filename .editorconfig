@@ -1,0 +1,27 @@
+# EditorConfig helps developers define and maintain consistent
+# coding styles between different editors and IDEs
+# http://editorconfig.org
+
+root = true
+
+[*]
+indent_style = space
+indent_size = 2
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+# <httpProtocol>
+# <customHeaders>
+# <add name="Access-Control-Allow-Origin" value="*" />
+# <add name="Access-Control-Allow-Headers" value="Content-Type" />
+# <add name="Access-Control-Allow-Methods" value="GET, POST, PUT, DELETE, OPTIONS" />
+# </customHeaders>
+# </httpProtocol>
+#
+#
+#  name="Access-Control-Allow-Origin" value="*"
+# name="Access-Control-Allow-Headers" value="Content-Type"
+#  name="Access-Control-Allow-Methods" value="GET, POST, PUT, DELETE, OPTIONS"
+#

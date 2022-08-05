@@ -1,0 +1,37 @@
+{
+  "name": "Item_rate",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "foreignKeys": {
+    "customerRateId": {
+      "name": "customerRateId",
+      "foreignKey": "customerRateId",
+      "entityKey": "id",
+      "entity": "Customer"
+    },
+    "itm_id": {
+      "name": "itm_id",
+      "foreignKey": "itm_id",
+      "entityKey": "id",
+      "entity": "Item"
+    }
+  },
+  "properties": {
+    "rate": {
+      "type": "number",
+      "required": true
+    },
+    "review": {
+      "type": "text",
+      "required": true,
+      "dataType": "mediumtext"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

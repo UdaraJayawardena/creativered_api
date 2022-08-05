@@ -1,0 +1,60 @@
+{
+  "name": "Product",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "foreignKeys": {
+    "categoryid": {
+      "name": "categoryid",
+      "foreignKey": "categoryid",
+      "entityKey": "id",
+      "entity": "Category"
+    }
+  },
+  "properties": {
+    "productType": {
+      "type": "string",
+      "required": true
+    },
+    "specList": {
+      "type": "text",
+      "required": true,
+      "dataType": "mediumtext"
+    },
+    "categoryid": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "item": {
+      "type": "hasMany",
+      "model": "Item",
+      "foreignKey": "productid"
+    },
+    "category": {
+      "type": "belongsTo",
+      "model": "Category",
+      "foreignKey": "categoryid",
+      "primaryKey": "id"
+    }
+  },
+  "acls": [
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "WRITE",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "DENY"
+    }
+  ],
+  "methods": {}
+}

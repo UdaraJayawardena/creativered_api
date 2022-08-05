@@ -1,0 +1,111 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "../common/mixins",
+      "./mixins"
+    ]
+  },
+  "User": {
+    "dataSource": "db",
+    "public": true
+  },
+  "AccessToken": {
+    "dataSource": "db",
+    "public": true
+  },
+  "ACL": {
+    "dataSource": "db",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "db",
+    "public": false,
+    "options": {
+      "strictObjectIDCoercion": true
+    }
+  },
+  "Role": {
+    "dataSource": "db",
+    "public": false
+  },
+  "Customer": {
+    "dataSource": "db",
+    "public": true
+  },
+  "ShippingAddress": {
+    "dataSource": "db",
+    "public": true
+  },
+  "BillingAddress": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Complain": {
+    "dataSource": "db",
+    "public": true
+  },
+  "ComplainType": {
+    "dataSource": "db",
+    "public": true
+  },
+  "RefundRequest": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Product": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Category": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Item": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Feedback": {
+    "dataSource": "db",
+    "public": true
+  },
+  "OrderDetail": {
+    "dataSource": "db",
+    "public": true
+  },
+  "News": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Orders": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Email": {
+    "dataSource": "sendmail",
+    "public": true
+  },
+  "WishList": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Item_rate": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Item_View": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Complain_reply": {
+    "dataSource": "db",
+    "public": true
+  }
+}

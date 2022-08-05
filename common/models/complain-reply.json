@@ -1,0 +1,78 @@
+{
+  "name": "Complain_reply",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "replyDate": {
+      "type": "string",
+      "required": true,
+      "length": null,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "replyDate",
+        "dataType": "date",
+        "dataLength": null,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "Y"
+      },
+      "_selectable": true
+    },
+    "replyTime": {
+      "type": "string",
+      "required": true,
+      "length": null,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "replyTime",
+        "dataType": "time",
+        "dataLength": null,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "Y"
+      },
+      "_selectable": true
+    },
+    "message": {
+      "type": "text",
+      "required": true,
+      "dataType": "mediumtext"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "complain": {
+      "type": "belongsTo",
+      "model": "Complain",
+      "foreignKey": "complainID",
+      "primaryKey": "id"
+    },
+    "user": {
+      "type": "belongsTo",
+      "model": "User",
+      "foreignKey": "complainUserID",
+      "primaryKey": "id"
+    }
+  },
+  "acls": [],
+  "methods": {},
+  "foreignKeys": {
+    "complainID": {
+      "name": "complainID",
+      "foreignKey": "complainID",
+      "entityKey": "id",
+      "entity": "Complain"
+    },
+    "complainUserID": {
+      "name": "complainUserID",
+      "foreignKey": "complainUserID",
+      "entityKey": "id",
+      "entity": "User"
+    }
+  }
+}

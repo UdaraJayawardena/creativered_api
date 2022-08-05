@@ -1,0 +1,83 @@
+{
+  "name": "Feedback",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "foreignKeys": {
+    "feedbackOrderId": {
+      "name": "feedbackOrderId",
+      "foreignKey": "feedbackOrderId",
+      "entityKey": "id",
+      "entity": "Orders"
+    }
+  },
+  "properties": {
+    "feedDate": {
+      "type": "string",
+      "required": true,
+      "length": null,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "feedDate",
+        "dataType": "date",
+        "dataLength": null,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "Y"
+      },
+      "_selectable": true
+    },
+    "feedTime": {
+      "type": "string",
+      "required": true,
+      "length": null,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "feedTime",
+        "dataType": "time",
+        "dataLength": null,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "Y"
+      },
+      "_selectable": true
+    },
+    "feedbackMessage": {
+      "type": "string"
+    },
+    "itemAsDescribe_Rate": {
+      "type": "number"
+    },
+    "communicationRate": {
+      "type": "number"
+    },
+    "shippingTimeRate": {
+      "type": "number"
+    },
+    "shippingHandlingRate": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "orders": {
+      "type": "belongsTo",
+      "model": "Orders",
+      "foreignKey": "feedbackOrderId",
+      "primaryKey": "id"
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "DENY"
+    }
+  ],
+  "methods": {}
+}

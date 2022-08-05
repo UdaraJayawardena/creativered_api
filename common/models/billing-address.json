@@ -1,0 +1,70 @@
+{
+  "name": "BillingAddress",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "foreignKeys": {
+    "customerBillingId": {
+      "name": "customerBillingId",
+      "foreignKey": "customerBillingId",
+      "entityKey": "id",
+      "entity": "Customer"
+    }
+  },
+  "properties": {
+    "firstName": {
+      "type": "string",
+      "required": true
+    },
+    "lastName": {
+      "type": "string",
+      "required": true
+    },
+    "addressOne": {
+      "type": "string",
+      "required": true
+    },
+    "addressTwo": {
+      "type": "string",
+      "required": true
+    },
+    "city": {
+      "type": "string",
+      "required": true
+    },
+    "country": {
+      "type": "string",
+      "required": true
+    },
+    "postalCode": {
+      "type": "string",
+      "required": true
+    },
+    "status": "boolean"
+  },
+  "validations": [],
+  "relations": {
+    "customer": {
+      "type": "belongsTo",
+      "model": "Customer",
+      "foreignKey": "customerBillingId",
+      "primaryKey": "id"
+    },
+    "orders": {
+      "type": "hasMany",
+      "model": "Orders",
+      "foreignKey": "billingid"
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "DENY"
+    }
+  ],
+  "methods": {}
+}

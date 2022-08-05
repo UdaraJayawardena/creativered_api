@@ -1,0 +1,69 @@
+{
+  "name": "Customer",
+  "base": "User",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "firstName": {
+      "type": "string",
+      "required": true
+    },
+    "lastName": {
+      "type": "string",
+      "required": true
+    },
+    "subscribe": {
+      "type": "boolean"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "shipping-address": {
+      "type": "hasMany",
+      "model": "ShippingAddress",
+      "foreignKey": "customerShippingId"
+    },
+    "billing-address": {
+      "type": "hasMany",
+      "model": "BillingAddress",
+      "foreignKey": "customerBillingId"
+    },
+    "item-rate": {
+      "type": "hasMany",
+      "model": "Item_rate",
+      "foreignKey": "customerRateId"
+    },
+    "item-view": {
+      "type": "hasMany",
+      "model": "Item_View",
+      "foreignKey": "customerViewId"
+    },
+    "orders": {
+      "type": "hasMany",
+      "model": "Orders",
+      "foreignKey": "customerOrderId"
+    },
+    "wish-list": {
+      "type": "hasOne",
+      "model": "wishList",
+      "foreignkey": "customerWishlistId"
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": {}
+}

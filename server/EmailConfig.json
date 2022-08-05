@@ -1,0 +1,8 @@
+{
+  "email": "creativered1925@gmail.com",
+  "redirect": "http://3.17.162.128/directSignIn",
+  "host": "3.17.162.128",
+  "port": 3000,
+  "adminURL": "3.14.6.214",
+  "resetPath": "/directReset"
+}

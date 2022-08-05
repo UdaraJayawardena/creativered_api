@@ -1,0 +1,74 @@
+{
+  "name": "OrderDetail",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "foreignKeys": {
+    "itemid": {
+      "name": "itemid",
+      "foreignKey": "itemid",
+      "entityKey": "id",
+      "entity": "Item"
+    },
+    "orderid": {
+      "name": "orderid",
+      "foreignKey": "orderid",
+      "entityKey": "id",
+      "entity": "Orders"
+    }
+  },
+  "properties": {
+    "qty": {
+      "type": "number"
+    },
+    "color": {
+      "type": "string"
+    },
+    "price": {
+      "type": "Number",
+      "required": true,
+      "dataPrecision": 8,
+      "dataScale": 2,
+      "mysql": {
+        "columnName": "price",
+        "dataType": "DECIMAL",
+        "dataPrecision": 8,
+        "dataScale": 2
+      }
+    },
+    "itemid": {
+      "type": "number",
+      "required": true
+    },
+    "orderid": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "orders": {
+      "type": "belongsTo",
+      "model": "Orders",
+      "foreignKey": "orderid",
+      "primaryKey": "id"
+    },
+    "item": {
+      "type": "belongsTo",
+      "model": "Item",
+      "foreignKey": "itemid",
+      "primaryKey": "id"
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "DENY"
+    }
+  ],
+  "methods": {}
+}
