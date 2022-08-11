@@ -15,7 +15,11 @@
       "type": "string",
       "required": true
     },
-    "emailVerified": "boolean",
+    "emailVerified": {
+      "type": "boolean",
+      "required": false,
+      "default": true
+    },
     "verificationToken": "string"
   },
   "options": {

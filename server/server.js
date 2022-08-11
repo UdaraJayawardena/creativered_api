@@ -76,7 +76,7 @@ appforexpress.post('/buy', (req, res) => {
       }
     })
     .catch((err) => {
-      console.log('error hasika');
+      console.log('============== error =============');
       console.log(err);
       let errdata = err;
       JSON.stringify(errdata);
@@ -89,7 +89,7 @@ appforexpress.get('/success', (req, res) => {
   console.log('not error');
   let sucesmess = res;
   let answer = res.json(sucesmess);
-  console.log('hasika ok' + answer);
+  console.log('success ok' + answer);
   res.send(res);
 });
 
@@ -219,7 +219,7 @@ appformail.post('/send-email', function(req, res) {
     },
   });
   let mailOptions = {
-    from: '"Hasika Sandarwan" <hasikasandaruwan.mgtuk@gmail.com>', // sender address
+    from: '"creativered1925@gmail.com', // sender address
     to: req.body.to, // list of receivers
     subject: req.body.subject, // Subject line
     text: req.body.body, // plain text body
@@ -248,8 +248,8 @@ appformail.post('/mail', function(req, resp) {
   var transporter = nodeMailer.createTransport({
     service: 'gmail',
     auth: {
-      user: 'hasikasandaruwan.mgtuk@gmail.com',
-      pass: '19951016',
+      user: 'creativered1925@gmail.com',
+      pass: 'osnxmquzdqngwzjg',
     },
   });
 

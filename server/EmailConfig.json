@@ -1,8 +1,8 @@
 {
   "email": "creativered1925@gmail.com",
-  "redirect": "http://3.17.162.128/directSignIn",
-  "host": "3.17.162.128",
+  "redirect": "http://ec2-3-111-113-150.ap-south-1.compute.amazonaws.com:3000/directSignIn",
+  "host": "http://ec2-3-111-113-150.ap-south-1.compute.amazonaws.com:3000",
   "port": 3000,
-  "adminURL": "3.14.6.214",
+  "adminURL": "http://ec2-3-111-113-150.ap-south-1.compute.amazonaws.com:5000",
   "resetPath": "/directReset"
 }
