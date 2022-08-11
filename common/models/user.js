@@ -18,6 +18,8 @@ var qs = require('querystring');
 var EmailConfig = require('../../server/EmailConfig');
 var SALT_WORK_FACTOR = 10;
 var crypto = require('crypto');
+const nodemailer = require('nodemailer');
+
 // bcrypt's max length is 72 bytes;
 // See https://github.com/kelektiv/node.bcrypt.js/blob/45f498ef6dc6e8234e58e07834ce06a50ff16352/src/node_blf.h#L59
 var MAX_PASSWORD_LENGTH = 72;
@@ -1152,7 +1154,7 @@ module.exports = function(User) {
     UserModel.beforeRemote('create', function(ctx, user, next) {
       var body = ctx.req.body;
       if (body && body.emailVerified) {
-        body.emailVerified = false;
+        body.emailVerified = true;
       }
       next();
     });
@@ -1486,6 +1488,44 @@ module.exports = function(User) {
       return u[pkName];
     });
     ctx.Model._invalidateAccessTokensOfUsers(userIdsToExpire, ctx.options, next);
+  });
+
+  /* custom remote methods */
+
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'creativered1925@gmail.com',
+      pass: 'osnxmquzdqngwzjg',
+    },
+  });
+
+  User.afterRemote('create', function(context, user, next) {
+    console.log("=============== user after remote ===============");
+    
+    const userData = JSON.parse(JSON.stringify(context.result))
+    
+    console.log('=============== userData =============');
+    console.log(userData);
+
+    const { email, username } = userData;
+
+    const mailOptions = {
+      from: 'creativered1925@gmail.com',
+      to: email,
+      subject: 'Admin Registration',
+      text: `Hi ${username}, your Admin Account Successfully Created`,
+    };
+  
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.log(`Email Error => ${info.response}`);
+      } else {
+        console.log(`Email Response => ${info.response}`);
+      }
+    });
+
+    next();
   });
 };
 
