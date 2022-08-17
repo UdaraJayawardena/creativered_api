@@ -45,7 +45,7 @@ module.exports = function(Customer) {
     console.log('=============== customerData =============');
     console.log(customerData);
 
-    const { email, firstName, lastName } = customerData;
+    const { email, firstName, lastName, username } = customerData;
 
     // const mailOptions = {
     //   from: 'creativered1925@gmail.com',
@@ -53,7 +53,6 @@ module.exports = function(Customer) {
     //   subject: 'Customer Registration',
     //   text: `Hi ${firstName} ${lastName}, your Account Successfully Created`,
     // };
-
 
     const mailOptions = {
       from: 'creativered1925@gmail.com',
@@ -127,7 +126,7 @@ module.exports = function(Customer) {
                   <tr>
                     <td style="padding:30px;background-color:#ffffff;">
                       <h1 style="margin-top:0;margin-bottom:16px;font-size:26px;line-height:32px;font-weight:bold;letter-spacing:-0.02em;">Welcome</h1>
-                      <h4 style="margin:0;">Hi ${firstName} ${lastName}, your Account Successfully Created</h4>
+                      <h4 style="margin:0;">Hi ${username}, your Account Successfully Created</h4>
                     </td>
                   </tr>
                   <tr>
