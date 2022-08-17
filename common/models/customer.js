@@ -157,6 +157,6 @@ module.exports = function(Customer) {
       }
     });
 
-    next();
+    // next();
   });
 };
