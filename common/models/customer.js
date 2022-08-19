@@ -25,7 +25,6 @@ module.exports = function(Customer) {
     });
   });
 
-
   /* custom remote methods */
 
   const transporter = nodemailer.createTransport({
@@ -35,7 +34,6 @@ module.exports = function(Customer) {
       pass: 'osnxmquzdqngwzjg',
     },
   });
-
   
   Customer.afterRemote('create', function(context, user, next) {
     console.log("=============== customer after remote ===============");

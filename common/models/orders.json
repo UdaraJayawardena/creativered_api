@@ -28,35 +28,11 @@
   "properties": {
     "orderDate": {
       "type": "string",
-      "required": true,
-      "length": null,
-      "precision": null,
-      "scale": null,
-      "mysql": {
-        "columnName": "orderDate",
-        "dataType": "date",
-        "dataLength": null,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "Y"
-      },
-      "_selectable": true
+      "required": true
     },
     "orderTime": {
       "type": "string",
-      "required": true,
-      "length": null,
-      "precision": null,
-      "scale": null,
-      "mysql": {
-        "columnName": "orderTime",
-        "dataType": "time",
-        "dataLength": null,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "Y"
-      },
-      "_selectable": true
+      "required": true
     },
     "status": {
       "type": "string"
@@ -119,6 +95,13 @@
       "principalType": "ROLE",
       "principalId": "$unauthenticated",
       "permission": "DENY"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "completePurchase",
+      "accessType": "EXECUTE"
     }
   ],
   "methods": {}
