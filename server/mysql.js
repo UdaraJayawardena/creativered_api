@@ -14,4 +14,10 @@ const pool = mysql.createPool({
 
 console.log("MySQL Pool Connected...");
 
-exports.pool = pool;
+module.exports = {
+    pool:pool,
+    mysql:mysql
+};
+
+// exports.pool = pool;
+// exports.mysql = mysql;
