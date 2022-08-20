@@ -5,7 +5,7 @@
   "options": {
     "validateUpsert": true
   },
-  "foreignKeys": {
+  "foreignKeys": {  
     "customerViewId": {
       "name": "customerViewId",
       "foreignKey": "customerViewId",
