@@ -102,6 +102,13 @@
       "permission": "ALLOW",
       "property": "completePurchase",
       "accessType": "EXECUTE"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "fetchOrderbyUserId",
+      "accessType": "EXECUTE"
     }
   ],
   "methods": {}

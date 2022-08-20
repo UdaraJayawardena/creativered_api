@@ -122,13 +122,6 @@ module.exports = function (Orders) {
               result => result.id === item.itemid
             )
 
-            // const itemFilter = updatedItemsArr.filter(
-            //   (result) => {
-            //     console.log('result.id =>', result.id, 'item.itemid =>', item.itemid)
-            //     console.log('condition =>', result.id === item.itemid)
-            //     result.id === item.itemid
-            //   })
-
             const itemObj = itemFilter[0]
 
             console.log('============= itemObj =============')
@@ -353,6 +346,73 @@ module.exports = function (Orders) {
     }
   }
 
+  Orders.fetchOrderbyUserId = function (userId, cb) {
+    if (userId === undefined || userId === 0) {
+      return cb(null, {
+        message: 'required-fields-missing',
+        code: 400
+      })
+    }
+
+    try {
+      const fetchAllAddresses = () => {
+        dbConnection.getConnection(function (err, con) {
+          con.connect(function (err) {
+            const query = `SELECT * FROM ShippingAddress where customerShippingId = ${userId} LIMIT 1`
+
+            con.query(query, function (err, result) {
+              const shippingAddress = JSON.parse(JSON.stringify(result))[0]
+
+              console.log('============== shippingAddress =================')
+              console.log(shippingAddress)
+
+              fetchAllOrders(shippingAddress)
+            })
+          })
+        })
+      }
+
+      fetchAllAddresses()
+
+      const fetchAllOrders = shippingAddressObj => {
+        const finalUpdatedOrderListArr = []
+        console.log('=============== shippingAddressObj =============')
+        console.log(shippingAddressObj)
+
+        const updatedShippingAddress =
+          shippingAddressObj.addressOne + ' ' + shippingAddressObj.addressTwo
+
+        dbConnection.getConnection(function (err, con) {
+          con.connect(function (err) {
+            const query = `SELECT * FROM Orders where customerOrderId = ${userId}`
+
+            con.query(query, function (err, result) {
+              const updatedOrderList = JSON.parse(JSON.stringify(result))
+
+              console.log('============== updatedOrderList =================')
+              console.log(updatedOrderList)
+
+              async.eachOf(updatedOrderList, (item, index, cb_orders) => {
+                const updateOrderObj = item
+                updateOrderObj.shippingAddress = updatedShippingAddress
+
+                finalUpdatedOrderListArr.push(updateOrderObj)
+
+                cb_orders()
+              })
+
+              const responseObj = { data: finalUpdatedOrderListArr }
+              cb(null, responseObj)
+            })
+          })
+        })
+      }
+    } catch (error) {
+
+      cb(null, {"error":"error"})
+    }
+  }
+
   Orders.remoteMethod('completePurchase', {
     accepts: [
       { arg: 'data', type: 'object', http: { source: 'body' } },
@@ -360,6 +420,19 @@ module.exports = function (Orders) {
     ],
     http: {
       verb: 'post'
+    },
+    returns: [
+      {
+        type: 'object',
+        root: true
+      }
+    ]
+  })
+
+  Orders.remoteMethod('fetchOrderbyUserId', {
+    accepts: [{ arg: 'userId', type: 'string' }],
+    http: {
+      verb: 'get'
     },
     returns: [
       {
