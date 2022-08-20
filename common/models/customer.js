@@ -1,29 +1,34 @@
-'use strict';
+'use strict'
 
-var config = require('../../server/config.json');
+var config = require('../../server/config.json')
 // var senderAddress = 'oliver123cullen@gmail.com';
-var senderAddress = 'creativered1925@gmail.com';
-var EmailConfig = require('../../server/EmailConfig');
-const nodemailer = require('nodemailer');
+var senderAddress = 'creativered1925@gmail.com'
+var EmailConfig = require('../../server/EmailConfig')
+const nodemailer = require('nodemailer')
 
+module.exports = function (Customer) {
+  Customer.on('resetPasswordRequest', function (info) {
+    var url = 'http://' + EmailConfig.host + EmailConfig.resetPath
+    var html =
+      'Click <a href="' +
+      url +
+      '?access_token=' +
+      info.accessToken.id +
+      '">here</a> to reset your password'
 
-module.exports = function(Customer) {
-
-  Customer.on('resetPasswordRequest', function(info) {
-    var url = 'http://' + EmailConfig.host + EmailConfig.resetPath;
-    var html = 'Click <a href="' + url + '?access_token=' +
-      info.accessToken.id + '">here</a> to reset your password';
-
-    Customer.app.models.Email.send({
-      to: info.email,
-      from: senderAddress,
-      subject: 'Password reset',
-      html: html,
-    }, function(err) {
-      if (err) return console.log('> error sending password reset email');
-      console.log('> sending password reset email to:', info.email);
-    });
-  });
+    Customer.app.models.Email.send(
+      {
+        to: info.email,
+        from: senderAddress,
+        subject: 'Password reset',
+        html: html
+      },
+      function (err) {
+        if (err) return console.log('> error sending password reset email')
+        console.log('> sending password reset email to:', info.email)
+      }
+    )
+  })
 
   /* custom remote methods */
 
@@ -31,19 +36,19 @@ module.exports = function(Customer) {
     service: 'gmail',
     auth: {
       user: 'creativered1925@gmail.com',
-      pass: 'osnxmquzdqngwzjg',
-    },
-  });
-  
-  Customer.afterRemote('create', function(context, user, next) {
-    console.log("=============== customer after remote ===============");
-    
-    const customerData = JSON.parse(JSON.stringify(context.result))
-    
-    console.log('=============== customerData =============');
-    console.log(customerData);
+      pass: 'osnxmquzdqngwzjg'
+    }
+  })
 
-    const { email, firstName, lastName, username } = customerData;
+  Customer.afterRemote('create', function (context, user, next) {
+    console.log('=============== customer after remote ===============')
+
+    const customerData = JSON.parse(JSON.stringify(context.result))
+
+    console.log('=============== customerData =============')
+    console.log(customerData)
+
+    const { email, firstName, lastName, username } = customerData
 
     // const mailOptions = {
     //   from: 'creativered1925@gmail.com',
@@ -130,7 +135,9 @@ module.exports = function(Customer) {
                   <tr>
                     <td style="padding:0;font-size:24px;line-height:28px;font-weight:bold;">
                       <a href="http://ec2-3-111-113-150.ap-south-1.compute.amazonaws.com:4200" style="text-decoration:none;"><img src="https://creativered-bucket.s3.ap-south-1.amazonaws.com/images/logo_name.png" width="600" alt="" style="width:100%;height:auto;display:block;border:none;text-decoration:none;color:#363636;"></a>
-                    </td>
+                  
+                      <a href="http://ec2-3-111-113-150.ap-south-1.compute.amazonaws.com:4200" style="text-decoration:none;">Client here to Login</a>
+                      </td>
                   </tr>
                 </table>
                 <!--[if mso]>
@@ -145,16 +152,16 @@ module.exports = function(Customer) {
       </body>
       </html>`,
       headers: { 'x-myheader': 'Email Header' }
-    };
-  
+    }
+
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
-        console.log(`Email Error => ${info.response}`);
+        console.log(`Email Error => ${info.response}`)
       } else {
-        console.log(`Email Response => ${info.response}`);
+        console.log(`Email Response => ${info.response}`)
       }
-    });
+    })
 
-    next();
-  });
-};
+    next()
+  })
+}
