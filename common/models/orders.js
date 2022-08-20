@@ -119,14 +119,16 @@ module.exports = function (Orders) {
           itemDetails,
           (item, index, cb_filter_items) => {
             const itemFilter = updatedItemsArr.filter(
-              (result) => {
-                console.log('result.id =>', result.id, 'item.itemid =>', item.itemid)
-                console.log('condition =>', result.id === item.itemid)
-    
-                result.id === item.itemid
-              })
+              result => result.id === item.itemid
+            )
 
-            
+            // const itemFilter = updatedItemsArr.filter(
+            //   (result) => {
+            //     console.log('result.id =>', result.id, 'item.itemid =>', item.itemid)
+            //     console.log('condition =>', result.id === item.itemid)
+            //     result.id === item.itemid
+            //   })
+
             const itemObj = itemFilter[0]
 
             console.log('============= itemObj =============')
