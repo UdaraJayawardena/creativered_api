@@ -356,60 +356,73 @@ module.exports = function (Orders) {
 
     try {
       const fetchAllAddresses = () => {
-        dbConnection.getConnection(function (err, con) {
-          con.connect(function (err) {
-            const query = `SELECT * FROM ShippingAddress where customerShippingId = ${userId} LIMIT 1`
+        try {
+          dbConnection.getConnection(function (err, con) {
+            con.connect(function (err) {
+              const query = `SELECT * FROM ShippingAddress where customerShippingId = ${userId} LIMIT 1`
 
-            con.query(query, function (err, result) {
-              const shippingAddress = JSON.parse(JSON.stringify(result))[0]
+              con.query(query, function (err, result) {
+                const shippingAddress = JSON.parse(JSON.stringify(result))[0]
 
-              console.log('============== shippingAddress =================')
-              console.log(shippingAddress)
+                console.log('============== shippingAddress =================')
+                console.log(shippingAddress)
 
-              fetchAllOrders(shippingAddress)
+                fetchAllOrders(shippingAddress)
+              })
             })
           })
-        })
+        } catch (error) {
+          cb(null, { message: 'error-in-fetch-address', status: 400 })
+        }
       }
 
       fetchAllAddresses()
 
       const fetchAllOrders = shippingAddressObj => {
-        const finalUpdatedOrderListArr = []
-        console.log('=============== shippingAddressObj =============')
-        console.log(shippingAddressObj)
+        try {
+          const finalUpdatedOrderListArr = []
+          console.log('=============== shippingAddressObj =============')
+          console.log(shippingAddressObj)
 
-        const updatedShippingAddress =
-          shippingAddressObj.addressOne + ' ' + shippingAddressObj.addressTwo
+          const updatedShippingAddress =
+            shippingAddressObj.addressOne + ' ' + shippingAddressObj.addressTwo
 
-        dbConnection.getConnection(function (err, con) {
-          con.connect(function (err) {
-            const query = `SELECT * FROM Orders where customerOrderId = ${userId}`
+          dbConnection.getConnection(function (err, con) {
+            con.connect(function (err) {
+              const query = `SELECT * FROM Orders where customerOrderId = ${userId}`
 
-            con.query(query, function (err, result) {
-              const updatedOrderList = JSON.parse(JSON.stringify(result))
+              con.query(query, function (err, result) {
+                const updatedOrderList = JSON.parse(JSON.stringify(result))
 
-              console.log('============== updatedOrderList =================')
-              console.log(updatedOrderList)
+                console.log(
+                  '============== updatedOrderList ================='
+                )
+                console.log(updatedOrderList)
 
-              async.eachOf(updatedOrderList, (item, index, cb_orders) => {
-                const updateOrderObj = item
-                updateOrderObj.shippingAddress = updatedShippingAddress
+                async.eachOf(updatedOrderList, (item, index, cb_orders) => {
+                  const updateOrderObj = item
+                  updateOrderObj.shippingAddress = updatedShippingAddress
 
-                finalUpdatedOrderListArr.push(updateOrderObj)
+                  finalUpdatedOrderListArr.push(updateOrderObj)
 
-                cb_orders()
+                  cb_orders()
+                })
+
+                const responseObj = {
+                  message: 'sucess',
+                  status: 200,
+                  data: finalUpdatedOrderListArr
+                }
+                cb(null, responseObj)
               })
-
-              const responseObj = { data: finalUpdatedOrderListArr }
-              cb(null, responseObj)
             })
           })
-        })
+        } catch (error) {
+          cb(null, { message: 'error-in-fetch-orders', status: 400 })
+        }
       }
     } catch (error) {
-
-      cb(null, {"error":"error"})
+      cb(null, { message: 'unepected-error-occured', status: 500 })
     }
   }
 
