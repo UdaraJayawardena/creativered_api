@@ -38,8 +38,8 @@ module.exports = function (Complainreply) {
       }
 
       const mailOptions = {
-        from: 'nuwannadeera1997@gmail.com',
-        to: email,
+        from: 'creativered1925@gmail.com',
+        to: "nuwannadeera1997@gmail.com",
         subject: 'Complain Reply Message',
         text: `${message} #Issue Resolved By Admin`
       }
@@ -54,6 +54,7 @@ module.exports = function (Complainreply) {
         }
       })
     } catch (error) {
+        console.error(error);
       return cb(null, {
         message: 'unexpected-error-occured',
         code: 500
