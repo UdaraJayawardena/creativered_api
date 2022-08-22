@@ -17,20 +17,10 @@ module.exports = function (Complainreply) {
       }
     })
 
-    // {
-    //     "comDate": "2022-08-21",
-    //     "comTime": "01:37:21",
-    //     "message": "item was damaged",
-    //     "status": "true",
-    //     "complainTypeID": 1,
-    //     "id": 1,
-    //     "complainOrderId": 1
-    //   }
-
     try {
-      let { message } = data
+      let { to, subject, message } = data
 
-      if (message === undefined) {
+      if (message === undefined || to === undefined || subject === undefined) {
         return cb(null, {
           message: 'required-fields-missing',
           code: 400
@@ -39,9 +29,10 @@ module.exports = function (Complainreply) {
 
       const mailOptions = {
         from: 'creativered1925@gmail.com',
-        to: "nuwannadeera1997@gmail.com",
-        subject: 'Complain Reply Message',
-        text: `${message} #Issue Resolved By Admin`
+        to: to,
+        subject: subject,
+        html: message,
+        headers: { 'x-myheader': 'Email Header' }
       }
 
       transporter.sendMail(mailOptions, (error, info) => {
